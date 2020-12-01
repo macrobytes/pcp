@@ -75,6 +75,14 @@ func (e *copyFileRunner) Run() {
 // ParallelCopy - Leverages the thread pool executor to
 // copy the source directory to the specified destination
 func ParallelCopy(src string, dest string, threads int) {
+	srcInfo, err := os.Stat(src)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if !srcInfo.IsDir() {
+		log.Fatalf("%v is not a directory", src)
+	}
+
 	executor := threadpool.Init(threads)
 
 	files, dirs := readDir(src)
