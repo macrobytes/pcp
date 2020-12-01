@@ -23,7 +23,7 @@ func (e *Executor) execute(task Runnable) {
 }
 
 // Execute - Runs the specified function as a go-routine when space is
-// available in pool.
+// available in the pool.
 func (e *Executor) Execute(task Runnable) {
 	e.waitGroup.Add(1)
 	for {
